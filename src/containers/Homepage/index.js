@@ -4,11 +4,23 @@ import ListTask from '../../components/ListTask';
 import AddTask from '../../components/AddTask';
 
 class Homepage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            dataEdit: {}
+        }
+        this.edit = this.edit.bind(this);
+    }
+    edit(data) {
+        this.setState({
+            dataEdit: data
+        })
+    }
     render() {
         return (
             <React.Fragment>
-                <AddTask />
-                <ListTask />
+                <AddTask dataEdit={this.state.dataEdit}/>
+                <ListTask edit={this.edit}/>
             </React.Fragment>      
         )
     }

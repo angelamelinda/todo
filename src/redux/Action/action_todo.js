@@ -23,7 +23,6 @@ export function RequestGetAllTask() {
 
 export function RequestDeleteTask(id) {
     return dispatch => {
-        console.log('id: ',id)
         dispatch({type:'DELETING_TASK'});
         let url = 'http://localhost:8000/tasks/'+id;
         return axios.delete(url).then(resp => {
@@ -32,11 +31,10 @@ export function RequestDeleteTask(id) {
         })
     }
 }
-export function RequestChangeStatus(id, data) {
+export function RequestEditTask(id, data) {
     return dispatch => {
         dispatch({type:'TASK_EDITING'});
         let url = 'http://localhost:8000/tasks/'+id;
-        console.log(data,'daata om');
         return axios.put(url, data).then(resp => {
             dispatch({type:'TASK_EDITED',payload:resp.data})
             dispatch(RequestGetAllTask());

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { RequestAddTask } from '../../redux/Action/action_todo';
+import { RequestAddTask, RequestEditTask } from '../../redux/Action/action_todo';
 
 class AddTask extends Component {
     constructor(props) {
@@ -9,19 +9,27 @@ class AddTask extends Component {
     }
     handleSubmit(e) {
         e.preventDefault();
-
-        let date = new Date();
-        
-        let taskName = this.task.value,
-            taskStatus = "On Going",
-            taskCreated_date = date.getTime(),
-            detailTask = {name: taskName, status: taskStatus, created_date: taskCreated_date};
-
-        this.props.RequestAddTask(detailTask);
+        if(this.task.value != '' && this.props.dataEdit.length > 0) {
+            let id = this.props.dataEdit[0]._id, 
+                detailTask = { name: this.task.value, status: this.props.dataEdit[0].status, created_date: this.props.dataEdit[0].created_date}
+            
+            this.props.RequestEditTask(id, detailTask);
+        } else if(this.task.value != ''){
+            let date = new Date(),
+                taskName = this.task.value,
+                taskStatus = "On Going",
+                taskCreated_date = date.getTime(),
+                detailTask = {name: taskName, status: taskStatus, created_date: taskCreated_date};
+    
+            this.props.RequestAddTask(detailTask);
+        }
 
         this.task.value = '';
     }
     render() {
+        if(this.props.dataEdit.length > 0) {
+            this.task.value = this.props.dataEdit[0].name;
+        }
         return (
             <div className="add-task">
                 <form onSubmit={this.handleSubmit}>
@@ -35,14 +43,13 @@ class AddTask extends Component {
 
 const mapStateToProps = (state) => {
     return {
-      taskIsAdded: state.Task.isAdded,
-    //   listConvertedCurrency: state.Convertion.listConvertedCurrency
+      taskIsAdded: state.Task.isAdded
     }
   }
   
 const matchDispatchToProps = (dispatch) => {
     return {
-        // RequestCurrencyData : () => dispatch(RequestCurrencyData()),
+        RequestEditTask : (id, detailTask) => dispatch(RequestEditTask(id, detailTask)),
         RequestAddTask : (detailTask) => dispatch(RequestAddTask(detailTask))
     }
 }
