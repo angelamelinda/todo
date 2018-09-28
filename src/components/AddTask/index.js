@@ -14,11 +14,9 @@ export class AddTask extends Component {
             let id = this.props.dataEdit[0]._id, 
                 detailTask = { name: this.task.value, status: this.props.dataEdit[0].status, created_date: this.props.dataEdit[0].created_date}
             
-            this.props.RequestEditTask(id, detailTask);
-            
-            if(this.props.taskIsAdded) {
+            this.props.RequestEditTask(id, detailTask).then(() => {
                 this.props.RequestGetAllTask();
-            }
+            })
             
         } else if(this.task.value != ''){
             let date = new Date(),
@@ -27,11 +25,9 @@ export class AddTask extends Component {
                 taskCreated_date = date.getTime(),
                 detailTask = {name: taskName, status: taskStatus, created_date: taskCreated_date};
     
-            this.props.RequestAddTask(detailTask);
-
-            if(this.props.taskIsAdded) {
+            this.props.RequestAddTask(detailTask).then(() => {
                 this.props.RequestGetAllTask();
-            }
+            })
         }
 
         this.task.value = '';

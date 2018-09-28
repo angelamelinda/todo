@@ -14,7 +14,7 @@ export class ListTask extends Component {
         e.preventDefault();
         
         let id = e.target.parentNode.getAttribute('id');
-        this.props.RequestDeleteTask(id).then(() => {;
+        this.props.RequestDeleteTask(id).then(() => {
             this.props.RequestGetAllTask();
         })
     }
@@ -39,8 +39,9 @@ export class ListTask extends Component {
             'status':data[0].status,
             'created_date':data[0].created_date
         }
-        this.props.RequestEditTask(id, detailTask);
-        this.props.RequestGetAllTask();
+        this.props.RequestEditTask(id, detailTask).then(() => {
+            this.props.RequestGetAllTask();
+        })
     }
     handleEdit(e) {
         let id = e.target.parentNode.getAttribute('id');
@@ -74,7 +75,8 @@ export class ListTask extends Component {
 const mapStateToProps = (state) => {
     return {
       listTask: state.Task.listTask,
-      isFetched: state.Task.isFetched
+      isFetched: state.Task.isFetched,
+      taskIsAdded: state.Task.isAdded
     }
   }
   
