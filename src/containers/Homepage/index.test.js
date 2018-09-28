@@ -3,14 +3,14 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import toJson from 'enzyme-to-json';
 
-import App from './App';
+import Homepage from './';
 
 Enzyme.configure({ adapter: new Adapter()});
 
-describe('App', () => {
+describe('Homepage', () => {
   it('renders without crashing', () => {
     const wrapper = shallow(
-      <App />
+      <Homepage />
     )
     expect(toJson(wrapper), {mode:'shallow'}).toMatchSnapshot();
   });

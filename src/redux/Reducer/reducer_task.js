@@ -1,11 +1,11 @@
-const initialState = { isGetting: false, isGot: false, isAdding: false, isAdded: false, isEditing: false, isEdited: false, isDeleting: false, isDeleted: false, listTask: {} }
+export const initialState = { isFetching: false, isFetched: false, isAdding: false, isAdded: false, isEditing: false, isEdited: false, isDeleting: false, isDeleted: false, listTask: {} }
 
-export function Task(state = initialState, action) {
+export default function Task(state = initialState, action) {
   switch (action.type) {
-    case 'GETTING_TASK':
-      return {...state, isGetting: true, isGot: false}
-    case 'GOT_TASK':
-      return {...state, isGetting: false, isGot: true, listTask: action.payload}
+    case 'TASK_FETCHING':
+      return {...state, isFetching: true, isFetched: false}
+    case 'TASK_FETCHED':
+      return {...state, isFetching: false, isFetched: true, listTask: action.payload}
     case 'TASK_ADDING':
       return {...state, isAdding: true, isAdded: false}
     case 'TASK_ADDED':

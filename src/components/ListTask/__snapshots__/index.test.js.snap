@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListTask matches with snapshot 1`] = `
+<div
+  className="list-tasks row"
+/>
+`;
