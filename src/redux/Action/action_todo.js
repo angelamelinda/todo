@@ -7,6 +7,7 @@ export function RequestAddTask(taskDetail) {
             taskDetail
         ).then(resp => {
             dispatch({type:'TASK_ADDED',payload:resp.data})
+            dispatch(RequestGetAllTask());
         });
     }
 }
@@ -25,6 +26,7 @@ export function RequestDeleteTask(id) {
         let url = 'http://localhost:8000/tasks/'+id;
         return axios.delete(url).then(resp => {
             dispatch({type:'TASK_DELETED',payload:resp.data})
+            dispatch(RequestGetAllTask());
         })
     }
 }
@@ -34,6 +36,7 @@ export function RequestEditTask(id, data) {
         let url = 'http://localhost:8000/tasks/'+id;
         return axios.put(url, data).then(resp => {
             dispatch({type:'TASK_EDITED',payload:resp.data})
+            dispatch(RequestGetAllTask());
         })
     }
 }

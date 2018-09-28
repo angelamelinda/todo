@@ -14,9 +14,7 @@ export class ListTask extends Component {
         e.preventDefault();
         
         let id = e.target.parentNode.getAttribute('id');
-        this.props.RequestDeleteTask(id).then(() => {
-            this.props.RequestGetAllTask();
-        })
+        this.props.RequestDeleteTask(id);
     }
     handleChangeStatus(e) {
         e.preventDefault();
@@ -39,9 +37,7 @@ export class ListTask extends Component {
             'status':data[0].status,
             'created_date':data[0].created_date
         }
-        this.props.RequestEditTask(id, detailTask).then(() => {
-            this.props.RequestGetAllTask();
-        })
+        this.props.RequestEditTask(id, detailTask);
     }
     handleEdit(e) {
         let id = e.target.parentNode.getAttribute('id');

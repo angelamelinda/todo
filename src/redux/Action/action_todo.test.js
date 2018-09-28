@@ -35,7 +35,8 @@ describe('async actions', () => {
 
         const expectedActions = [
             { type: 'TASK_DELETING' },
-            { type: 'TASK_DELETED', payload: 'Task '+_id+' deleted!'}
+            { type: 'TASK_DELETED', payload: 'Task '+_id+' deleted!'},
+            { type: 'TASK_FETCHING'}
         ];
 
         return store.dispatch(actions.RequestDeleteTask(_id)).then(() => {
@@ -54,7 +55,8 @@ describe('async actions', () => {
 
         const expectedActions = [
             { type: 'TASK_ADDING' },
-            { type: 'TASK_ADDED', payload: expect.any(Object)}
+            { type: 'TASK_ADDED', payload: expect.any(Object)},
+            { type: 'TASK_FETCHING'}
         ];
 
 
@@ -67,7 +69,7 @@ describe('async actions', () => {
 
         let  _id = '5bacdee37935a236e8131f2b';
         let detailTask = {
-            name: 'Belanja di pasar 7', 
+            name: 'Belanja di pasar makan', 
             status: 'On Going', 
             created_date: 12121212121
         };
@@ -76,7 +78,8 @@ describe('async actions', () => {
 
         const expectedActions = [
             { type: 'TASK_EDITING' },
-            { type: 'TASK_EDITED', payload: expect.any(Object)}
+            { type: 'TASK_EDITED', payload: expect.any(Object)},
+            { type: 'TASK_FETCHING'}
         ];
 
 
