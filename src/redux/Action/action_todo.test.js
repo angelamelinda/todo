@@ -1,7 +1,8 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import fetchMock from 'fetch-mock';
+// import fetchMock from 'fetch-mock';
 
+import { RequestDeleteTask, RequestEditTask, RequestGetAllTask } from '../../redux/Action/action_todo';
 import * as actions from './action_todo';
 
 const middlewares = [thunk];
@@ -16,8 +17,8 @@ describe('async actions', () => {
     })
 
     afterEach(() => {
-        fetchMock.reset()
-        fetchMock.restore()
+        // fetchMock.reset()
+        // fetchMock.restore()
     })
 
     it('should TASK_ADDED when adding is done', () => {
@@ -28,7 +29,7 @@ describe('async actions', () => {
             created_date: date.getTime()
         };
 
-        fetchMock.postOnce('/tasks', { body: detailTask, headers: { 'content-type': 'application/json' }} );
+        // fetchMock.postOnce('/tasks', { body: detailTask, headers: { 'content-type': 'application/json' }} );
 
         const expectedActions = [
             { type: 'TASK_ADDING' },
@@ -55,36 +56,36 @@ describe('async actions', () => {
         });
     })
 
-    // it('should TASK_EDITED when editing is done', () => {
+    it('should TASK_EDITED when editing is done', () => {
 
-    //     let  _id = data[0].payload._id;
-    //     let detailTask = {
-    //         name: 'Belanja di pasar makan', 
-    //         status: data[0].payload.status, 
-    //         created_date: data[0].payload.created_date
-    //     };
+        let  _id = data[0].payload._id;
+        let detailTask = {
+            name: 'Belanja di pasar makan', 
+            status: data[0].payload.status, 
+            created_date: data[0].payload.created_date
+        };
 
-    //     fetchMock.putOnce('/tasks'+_id, detailTask);
+        // fetchMock.putOnce('/tasks'+_id, detailTask);
 
-    //     const expectedActions = [
-    //         { type: 'TASK_EDITING' },
-    //         { type: 'TASK_EDITED', payload: expect.any(Object)},
-    //         { type: 'TASK_FETCHING'}
-    //     ];
+        const expectedActions = [
+            { type: 'TASK_EDITING' },
+            { type: 'TASK_EDITED', payload: expect.any(Object)},
+            { type: 'TASK_FETCHING'}
+        ];
 
 
-    //     return store.dispatch(actions.RequestEditTask(_id,detailTask)).then(() => {
-    //         expect(store.getActions()).toEqual(expectedActions)
-    //     });
-    // })
+        return store.dispatch(actions.RequestEditTask(_id,detailTask)).then(() => {
+            expect(store.getActions()).toEqual(expectedActions)
+        });
+    })
 
     it('should TASK_DELETED when deleting is done', () => {
         let  _id = data[0].payload._id;
-        fetchMock.delete('/tasks/'+_id, 200);
+        // fetchMock.delete('/tasks/'+_id, 200);
 
         const expectedActions = [
             { type: 'TASK_DELETING' },
-            { type: 'TASK_DELETED', payload: 'Task '+_id+' deleted!'},
+            { type: 'TASK_DELETED', payload: {'message':'Task '+_id+' deleted!'}},
             { type: 'TASK_FETCHING'}
         ];
 

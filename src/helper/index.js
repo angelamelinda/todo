@@ -20,7 +20,6 @@ export function mockData() {
       RequestAddTask:jest.fn(),
       RequestEditTask:jest.fn(),
       RequestDeleteTask:jest.fn(),
-      RequestChangeStatus:jest.fn(),
       RequestGetAllTask:jest.fn(),
 
       handleDelete: jest.fn(),
