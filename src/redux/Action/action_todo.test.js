@@ -9,22 +9,26 @@ const mockStore = configureMockStore(middlewares);
 
 describe('async actions', () => {
     let store;
+    var data;
+
     beforeEach(() => {
         store = mockStore();
     })
+
     afterEach(() => {
         fetchMock.reset()
         fetchMock.restore()
     })
+
     it('should TASK_ADDED when adding is done', () => {
         let date = new Date();
         let detailTask = {
-            name: 'Tunggu aku pacar', 
+            name: 'Tunggu aku pacar oi', 
             status: 'On Going', 
             created_date: date.getTime()
         };
 
-        fetchMock.postOnce('/tasks', 200);
+        fetchMock.postOnce('/tasks', { body: detailTask, headers: { 'content-type': 'application/json' }} );
 
         const expectedActions = [
             { type: 'TASK_ADDING' },
@@ -32,11 +36,14 @@ describe('async actions', () => {
             { type: 'TASK_FETCHING'}
         ];
 
-
         return store.dispatch(actions.RequestAddTask(detailTask)).then(() => {
             expect(store.getActions()).toEqual(expectedActions)
+            data = store.getActions().filter((item) => {
+                return item.type == 'TASK_ADDED'  
+            });
         });
     })
+
     it('should TASK_FETCHED when fetching is done', () => { 
         const expectedActions = [
             { type: 'TASK_FETCHING' },
@@ -48,33 +55,16 @@ describe('async actions', () => {
         });
     })
 
-    // it('should TASK_DELETED when deleting is done', () => {
-    //     let _id = '5bacdee37935a236e8131f2b';
-
-    //     fetchMock.delete('/tasks/'+_id, 200);
-
-    //     const expectedActions = [
-    //         { type: 'TASK_DELETING' },
-    //         { type: 'TASK_DELETED', payload: 'Task '+_id+' deleted!'},
-    //         { type: 'TASK_FETCHING'}
-    //     ];
-
-    //     return store.dispatch(actions.RequestDeleteTask(_id)).then(() => {
-    //         expect(store.getActions()).toEqual(expectedActions)
-    //     });
-    // })
-
-
     // it('should TASK_EDITED when editing is done', () => {
 
-    //     let  _id = '5bacdee37935a236e8131f2b';
+    //     let  _id = data[0].payload._id;
     //     let detailTask = {
     //         name: 'Belanja di pasar makan', 
-    //         status: 'On Going', 
-    //         created_date: 12121212121
+    //         status: data[0].payload.status, 
+    //         created_date: data[0].payload.created_date
     //     };
 
-    //     fetchMock.putOnce('/tasks'+_id, 200);
+    //     fetchMock.putOnce('/tasks'+_id, detailTask);
 
     //     const expectedActions = [
     //         { type: 'TASK_EDITING' },
@@ -87,4 +77,19 @@ describe('async actions', () => {
     //         expect(store.getActions()).toEqual(expectedActions)
     //     });
     // })
+
+    it('should TASK_DELETED when deleting is done', () => {
+        let  _id = data[0].payload._id;
+        fetchMock.delete('/tasks/'+_id, 200);
+
+        const expectedActions = [
+            { type: 'TASK_DELETING' },
+            { type: 'TASK_DELETED', payload: 'Task '+_id+' deleted!'},
+            { type: 'TASK_FETCHING'}
+        ];
+
+        return store.dispatch(actions.RequestDeleteTask(_id)).then(() => {
+            expect(store.getActions()).toEqual(expectedActions)
+        });
+    })
 })
