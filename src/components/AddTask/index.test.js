@@ -33,5 +33,11 @@ describe('AddTask', () => {
         expect(addTask().prop("RequestAddTask")).toHaveBeenCalled();
     })
     
+    it('matches with snapshot', () => {
+        const wrapper = shallow(
+            <AddTask {...props} />
+        );
+        expect(toJson(wrapper),{mode:'shallow'}).toMatchSnapshot();
+    })
 })
 

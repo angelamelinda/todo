@@ -52,7 +52,7 @@ export class ListTask extends Component {
     }
     render() {
         let listTasks = this.props.isFetched && Object.keys(this.props.listTask).map((key) => (
-                <div key={this.props.listTask[key]._id} id={this.props.listTask[key]._id} className={ this.props.listTask[key].status == 'Completed' ? 'col-12 task-completed' : 'col-12' }>
+                <div key={key} id={this.props.listTask[key]._id} className={ this.props.listTask[key].status == 'Completed' ? 'col-12 task-completed' : 'col-12' }>
                     {this.props.listTask[key].name}
                     <button className="button-delete" onClick={this.handleDelete}>Delete</button>
                     <button className="button-edit" onClick={this.handleEdit}>Edit</button>

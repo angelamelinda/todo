@@ -3,5 +3,56 @@
 exports[`ListTask matches with snapshot 1`] = `
 <div
   className="list-tasks row"
-/>
+>
+  <div
+    className="col-12 task-completed"
+    id="5baee5b86d17d7190974e9f9"
+    key="0"
+  >
+    test mock
+    <button
+      className="button-delete"
+      onClick={[Function]}
+    >
+      Delete
+    </button>
+    <button
+      className="button-edit"
+      onClick={[Function]}
+    >
+      Edit
+    </button>
+    <button
+      className="button-change-status"
+      onClick={[Function]}
+    >
+      Done
+    </button>
+  </div>
+  <div
+    className="col-12"
+    id="5baeea07e8637f2dd4eb7676"
+    key="1"
+  >
+    maa
+    <button
+      className="button-delete"
+      onClick={[Function]}
+    >
+      Delete
+    </button>
+    <button
+      className="button-edit"
+      onClick={[Function]}
+    >
+      Edit
+    </button>
+    <button
+      className="button-change-status"
+      onClick={[Function]}
+    >
+      Done
+    </button>
+  </div>
+</div>
 `;

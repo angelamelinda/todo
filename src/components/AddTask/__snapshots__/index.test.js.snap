@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddTask matches with snapshot 1`] = `
+<div
+  className="add-task"
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      placeholder="What you want to do?"
+      type="text"
+    />
+    <button
+      type="submit"
+    >
+      Save
+    </button>
+  </form>
+</div>
+`;
