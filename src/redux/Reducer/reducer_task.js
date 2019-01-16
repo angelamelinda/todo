@@ -3,21 +3,21 @@ export const initialState = { isFetching: false, isFetched: false, isAdding: fal
 export default function Task(state = initialState, action) {
   switch (action.type) {
     case 'TASK_FETCHING':
-      return {...state, isFetching: true, isFetched: false}
+      return { ...state, isFetching: true, isFetched: false }
     case 'TASK_FETCHED':
-      return {...state, isFetching: false, isFetched: true, listTask: action.payload}
+      return { ...state, isFetching: false, isFetched: true, listTask: action.payload }
     case 'TASK_ADDING':
-      return {...state, isAdding: true, isAdded: false}
+      return { ...state, isAdding: true, isAdded: false }
     case 'TASK_ADDED':
-      return {...state, isAdding: false, isAdded: true, listTask: action.payload}
+      return { ...state, isAdding: true, isAdded: false, listTask: action.payload }
     case 'TASK_EDITING':
-      return {...state, isEditing: true, isEdited: false}
+      return { ...state, isEditing: true, isEdited: false }
     case 'TASK_EDITED':
-      return {...state, isEditing: false, isEdited: true, listTask: action.payload}
+      return { ...state, isEditing: false, isEdited: true, listTask: action.payload }
     case 'TASK_DELETING':
-      return {...state, isDeleting: true, isDeleted: false}
+      return { ...state, isDeleting: true, isDeleted: false }
     case 'TASK_DELETED':
-      return {...state, isDeleting: false, isDeleted: true, listTask: action.payload}
+      return { ...state, isDeleting: false, isDeleted: true, listTask: action.payload }
     default:
       return state
   }
